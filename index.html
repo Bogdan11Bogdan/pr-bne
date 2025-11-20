@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mini Gra 3D</title>
+  <link rel="preconnect" href="https://unpkg.com" />
+  <style>
+    :root {
+      color-scheme: light dark;
+      --text: #f7f7f7;
+      --bg: #0e0f1a;
+      --accent: #7cf2c4;
+      --accent-2: #f2d57c;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Inter", system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at 20% 20%, #1d2240 0%, #0e0f1a 45%, #0a0a15 100%);
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      color: var(--text);
+      overflow: hidden;
+    }
+
+    #game-root {
+      position: relative;
+      width: min(1100px, 95vw);
+      aspect-ratio: 16 / 9;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      overflow: hidden;
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01));
+      box-shadow:
+        0 40px 120px rgba(0, 0, 0, 0.55),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+    }
+
+    canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .hud {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      pointer-events: none;
+      padding: 16px 20px;
+    }
+
+    .hud-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .pill {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 999px;
+      padding: 10px 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .pill strong {
+      color: var(--accent);
+      letter-spacing: 0.02em;
+    }
+
+    .controls {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      pointer-events: all;
+    }
+
+    .control-key {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      padding: 6px 10px;
+      font-weight: 700;
+      color: var(--accent-2);
+    }
+
+    .card {
+      align-self: flex-end;
+      background: rgba(10, 10, 15, 0.7);
+      border-radius: 12px;
+      padding: 14px 16px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      max-width: 360px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+    }
+
+    .card h2 {
+      font-size: 18px;
+      margin-bottom: 6px;
+      color: var(--accent);
+    }
+
+    .card p {
+      font-size: 14px;
+      line-height: 1.4;
+      color: rgba(247, 247, 247, 0.85);
+    }
+
+    .footer {
+      font-size: 12px;
+      color: rgba(247, 247, 247, 0.6);
+      text-align: center;
+      letter-spacing: 0.02em;
+    }
+  </style>
+</head>
+<body>
+  <div id="game-root">
+    <canvas id="scene"></canvas>
+    <div class="hud">
+      <div class="hud-top">
+        <div class="pill" id="score-display">Wynik: <strong>0</strong></div>
+        <div class="pill" id="timer-display">Czas: <strong>60</strong> s</div>
+        <div class="controls pill">
+          <span class="control-key">W / ↑</span>
+          <span class="control-key">S / ↓</span>
+          <span class="control-key">A / ←</span>
+          <span class="control-key">D / →</span>
+          <span class="control-key">Spacja</span>
+        </div>
+      </div>
+      <div class="card">
+        <h2>Przyjemna gra 3D</h2>
+        <p>Poruszaj neonowym graczem, zbieraj pulsujące kryształki i wypróbuj skok w niskiej grawitacji. Złap jak najwięcej punktów przed końcem limitu czasu!</p>
+      </div>
+      <div class="footer">Trzymaj okno aktywne aby sterować. Wspierane przez Three.js.</div>
+    </div>
+  </div>
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>

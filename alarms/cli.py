@@ -115,10 +115,10 @@ def format_alarm_row(alarm) -> str:
     return f"#{alarm.alarm_id} | {alarm.time_str} | {schedule} | {status} | {alarm.label}"
 
 
-def main(argv: Iterable[str] | None = None) -> int:
+def main(argv: Iterable[str] | None = None, *, storage_path=None) -> int:
     parser = build_parser()
     args = parser.parse_args(list(argv) if argv is not None else None)
-    manager = AlarmManager(storage_path=args.storage)
+    manager = AlarmManager(storage_path=storage_path or args.storage)
 
     if args.command == "add":
         days = parse_weekdays(args.days)

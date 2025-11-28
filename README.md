@@ -20,18 +20,35 @@ python -m alarms.cli run
 ### Interfejs graficzny
 
 Aby uruchomić panel graficzny (wymaga biblioteki Tkinter dostępnej w standardowej
-dystrybucji Pythona), wykonaj:
+dystrybucji Pythona), wystarczy:
 
 ```bash
-python -m alarms.gui
+python -m alarms
 ```
 
 W oknie aplikacji znajdziesz listę istniejących budzików, formularz dodawania
 nowych oraz przyciski do podglądu najbliższych powiadomień i uruchomienia
 harmonogramu w tle.
 
-Domyślnie dane zapisywane są w pliku `~/.alarms.json`. Można wskazać własną ścieżkę za
-pomocą przełącznika `--storage` (np. podczas testowania).
+Domyślnie dane zapisywane są w pliku `~/.alarms.json`. Jeśli chcesz wskazać
+inną lokalizację pliku, użyj przełącznika `--storage` przed nazwą trybu, na
+przykład:
+
+```bash
+python -m alarms --storage /ścieżka/do/pliku.json
+```
+
+### Tryb CLI z poziomu `python -m alarms`
+
+Jeżeli wolisz pozostać przy wersji konsolowej, możesz uruchomić wszystkie
+dotychczasowe komendy przez ten sam punkt wejścia:
+
+```bash
+python -m alarms cli add 07:30 --label "Pobudka"
+python -m alarms cli list
+python -m alarms cli preview
+python -m alarms --storage /tmp/alarms.json cli run
+```
 
 ## Harmonogram
 
